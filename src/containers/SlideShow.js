@@ -23,6 +23,7 @@ export default class SlideShow extends Component {
         content: 'This is slide 3 content',
       },
     ],
+    animate: true,
   };
 
   render() {
