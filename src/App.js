@@ -10,7 +10,7 @@ class App extends Component {
       <div className="Slides-App">
         <Switch>
           <Route exact path="/" component={SlideShow} />
-          <Route exact path="/slides/:id" component={SlideShow} />
+          <Route path="/slides/:id" component={SlideShow} />
         </Switch>
       </div>
     );
