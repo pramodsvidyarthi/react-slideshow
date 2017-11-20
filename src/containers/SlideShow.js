@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Slide from '../components/Slide';
 import ArrowGroup from './ArrowGroup';
+
+const Animate = ({ children, ...props }) => (
+  <CSSTransition {...props} timeout={1000} classNames="slide-fade">
+    {children}
+  </CSSTransition>
+);
 
 export default class SlideShow extends Component {
   state = {
@@ -36,12 +43,13 @@ export default class SlideShow extends Component {
     }
 
     return (
-      <div is="slides-wrapper">
-        <Slide title={slide.title} content={slide.content} />
-        <ArrowGroup
-          currentSlide={slide}
-          totalSlides={this.state.slides.length}
-        />
+      <div id="slides-wrapper">
+        <TransitionGroup>
+          <Animate key={slide.id}>
+            <Slide title={slide.title} content={slide.content} />
+          </Animate>
+        </TransitionGroup>
+        <ArrowGroup currentSlide={slide} totalSlides={this.state.slides.length} />
       </div>
     );
   }

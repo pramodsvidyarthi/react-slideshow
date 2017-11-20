@@ -1,4 +1,6 @@
 .Slides-App {
+  position: relative;
+  overflow: hidden;
   text-align: center;
   width: 100vw;
   height: 100vh;
@@ -9,6 +11,7 @@
   padding: 15px;
   max-width: 50%;
   max-height: 50%;
+  width: 100%;
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -81,4 +84,26 @@
 .fade-exit.fade-exit-active {
   opacity: 0.01;
   transition: opacity 800ms ease-in;
+}
+
+.slide-fade-enter {
+  left: 100%;
+  opacity: 0.01;
+}
+
+.slide-fade-enter.slide-fade-enter-active {
+  left: 50%;
+  opacity: 1;
+  transition: all 1000ms ease-in;
+}
+
+.slide-fade-exit {
+  left: 50%;
+  opacity: 1;
+}
+
+.slide-fade-exit.slide-fade-exit-active {
+  left: 0%;
+  opacity: 0.01;
+  transition: all 1000ms ease-in;
 }
