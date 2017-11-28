@@ -30,7 +30,6 @@ export default class SlideShow extends Component {
         content: 'This is slide 3 content',
       },
     ],
-    animate: true,
   };
 
   render() {
@@ -43,14 +42,12 @@ export default class SlideShow extends Component {
     }
 
     return (
-      <div id="slides-wrapper">
-        <TransitionGroup>
-          <Animate key={slide.id}>
-            <Slide title={slide.title} content={slide.content} />
-          </Animate>
-        </TransitionGroup>
+      <TransitionGroup id="slides-wrapper">
+        <Animate key={slide.id}>
+          <Slide title={slide.title} content={slide.content} />
+        </Animate>
         <ArrowGroup currentSlide={slide} totalSlides={this.state.slides.length} />
-      </div>
+      </TransitionGroup>
     );
   }
 }
