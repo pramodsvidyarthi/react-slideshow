@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { TransitionGroup } from 'react-transition-group';
 import Slide from '../components/Slide';
 import ArrowGroup from './ArrowGroup';
-
-const Animate = ({ children, ...props }) => (
-  <CSSTransition {...props} timeout={1000} classNames="slide-fade">
-    {children}
-  </CSSTransition>
-);
+import Animate from '../components/Animate';
 
 export default class SlideShow extends Component {
   state = {
@@ -32,6 +27,20 @@ export default class SlideShow extends Component {
     ],
   };
 
+  handleKeyDown = (e) => {
+    // let id;
+    // switch(e.keyCode) {
+    //   case 39:
+    //     id = +this.props.match.params.id + 1;
+    //     break;
+    //   case 37:
+    //   id = +this.props.match.params.id - 1;
+    //   break;
+    //   default: return;
+    // }
+    // this.props.history.push(`/slides/${id}`);
+  }
+
   render() {
     const { match } = this.props;
     const slide = this.state.slides.find(slide => slide.id === +match.params.id);
@@ -42,7 +51,11 @@ export default class SlideShow extends Component {
     }
 
     return (
-      <TransitionGroup id="slides-wrapper">
+      <TransitionGroup
+        id="slides-wrapper"
+        tabIndex="0"
+        onKeyDown={this.handleKeyDown}
+      >
         <Animate key={slide.id}>
           <Slide title={slide.title} content={slide.content} />
         </Animate>
