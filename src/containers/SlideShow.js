@@ -28,17 +28,20 @@ export default class SlideShow extends Component {
   };
 
   handleKeyDown = (e) => {
-    // let id;
-    // switch(e.keyCode) {
-    //   case 39:
-    //     id = +this.props.match.params.id + 1;
-    //     break;
-    //   case 37:
-    //   id = +this.props.match.params.id - 1;
-    //   break;
-    //   default: return;
-    // }
-    // this.props.history.push(`/slides/${id}`);
+    e.preventDefault();
+    const key = e.keyCode;
+    let { id } = this.props.match.params;
+    if ((+id === 1 && key === 37) || (+id === this.state.slides.length && key === 39)) return;
+    switch(key) {
+      case 39:
+        id = +id + 1;
+        break;
+      case 37:
+      id = +id - 1;
+      break;
+      default: return;
+    }
+    this.props.history.push(`/slides/${id}`);
   }
 
   render() {
@@ -54,7 +57,7 @@ export default class SlideShow extends Component {
       <TransitionGroup
         id="slides-wrapper"
         tabIndex="0"
-        onKeyDown={this.handleKeyDown}
+        onKeyUp={this.handleKeyDown}
       >
         <Animate key={slide.id}>
           <Slide title={slide.title} content={slide.content} />
