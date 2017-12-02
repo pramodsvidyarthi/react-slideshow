@@ -73,42 +73,47 @@
   grid-column-start: 1; 
 }
 
-.fade-enter {
-  opacity: 0.01;
-}
-
-.fade-enter.fade-enter-active {
-  opacity: 1;
-  transition: opacity 1000ms ease-in;
-}
-
-.fade-exit {
-  opacity: 1;
-}
-
-.fade-exit.fade-exit-active {
-  opacity: 0.01;
-  transition: opacity 800ms ease-in;
-}
-
-.slide-fade-enter {
+.right .slide-fade-enter {
   left: 100%;
   opacity: 0.01;
 }
 
-.slide-fade-enter.slide-fade-enter-active {
+.right .slide-fade-enter.slide-fade-enter-active {
   left: 50%;
   opacity: 1;
   transition: all 1000ms ease-in;
 }
 
-.slide-fade-exit {
+.right .slide-fade-exit {
   left: 50%;
   opacity: 1;
 }
 
-.slide-fade-exit.slide-fade-exit-active {
+.right .slide-fade-exit.slide-fade-exit-active {
   left: 0%;
   opacity: 0.01;
   transition: all 1000ms ease-in;
 }
+
+.left .slide-fade-enter {
+  left: 0%;
+  opacity: 0.01;
+}
+
+.left .slide-fade-enter.slide-fade-enter-active {
+  left: 50%;
+  opacity: 1;
+  transition: all 1000ms ease-in;
+}
+
+.left .slide-fade-exit {
+  left: 50%;
+  opacity: 1;
+}
+
+.left .slide-fade-exit.slide-fade-exit-active {
+  left: 100%;
+  opacity: 0.01;
+  transition: all 1000ms ease-in;
+}
+

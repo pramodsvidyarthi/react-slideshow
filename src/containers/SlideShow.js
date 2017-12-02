@@ -9,24 +9,33 @@ import data from '../data';
 export default class SlideShow extends Component {
   state = {
     slides: data,
+    animateDirection: '',
   };
 
-  handleKeyDown = (e) => {
+  componentWillReceiveProps(nextProps) {
+    const currentId = this.props.match.params.id;
+    const nextId = nextProps.match.params.id;
+    const animateDirection = nextId > currentId ? 'right' : 'left';
+    this.setState({ animateDirection });
+  }
+
+  handleKeyDown = e => {
     e.preventDefault();
     const key = e.keyCode;
     let { id } = this.props.match.params;
     if ((+id === 1 && key === 37) || (+id === this.state.slides.length && key === 39)) return;
-    switch(key) {
+    switch (key) {
       case 39:
         id = +id + 1;
         break;
       case 37:
-      id = +id - 1;
-      break;
-      default: return;
+        id = +id - 1;
+        break;
+      default:
+        return;
     }
     this.props.history.push(`/slides/${id}`);
-  }
+  };
 
   render() {
     const { match } = this.props;
@@ -42,6 +51,7 @@ export default class SlideShow extends Component {
         id="slides-wrapper"
         tabIndex="0"
         onKeyUp={this.handleKeyDown}
+        className={this.state.animateDirection}
       >
         <Animate key={slide.id}>
           <Slide title={slide.title} content={slide.content} />
