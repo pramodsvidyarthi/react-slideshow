@@ -54,7 +54,7 @@ export default class SlideShow extends Component {
         className={this.state.animateDirection}
       >
         <Animate key={slide.id}>
-          <Slide title={slide.title} content={slide.content} />
+          <Slide slide={slide} />
         </Animate>
         <ArrowGroup currentSlide={slide} totalSlides={this.state.slides.length} />
       </TransitionGroup>
