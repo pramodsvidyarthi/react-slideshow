@@ -16,7 +16,7 @@
 }
 
 .slide {
-  position: relative;
+  position: absolute;
   max-width: 50%;
   width: 100%;
   left: 50%;
