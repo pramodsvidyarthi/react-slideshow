@@ -5,8 +5,8 @@ export default class ArrowGroup extends Component {
   getAvailableArrowClassNames() {
     const { currentSlide, totalSlides } = this.props;
     return {
-      "arrow-right": currentSlide.id < totalSlides ? `/slides/${currentSlide.id + 1}` : null,
-      "arrow-left": currentSlide.id > 1 ? `/slides/${currentSlide.id - 1}` : null,
+      "right": currentSlide.id < totalSlides ? `/slides/${currentSlide.id + 1}` : null,
+      "left": currentSlide.id > 1 ? `/slides/${currentSlide.id - 1}` : null,
     }
   }
 
@@ -19,7 +19,7 @@ export default class ArrowGroup extends Component {
           if (availableArrowClasses[arrow]) {
             return <Arrow
             key={availableArrowClasses[arrow]}
-            className={arrow}
+            className={`control-arrow ${arrow}`}
             path={availableArrowClasses[arrow]}
             />
           }
