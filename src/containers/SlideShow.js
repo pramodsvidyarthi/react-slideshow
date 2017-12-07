@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { TransitionGroup } from 'react-transition-group';
+import debounce from 'lodash.debounce';
 import Slide from '../components/Slide';
 import ArrowGroup from './ArrowGroup';
 import Animate from '../components/Animate';
@@ -12,6 +13,8 @@ export default class SlideShow extends Component {
     animateDirection: '',
   };
 
+  navigateSlide = debounce(this.navigateSlide.bind(this), 500);
+
   componentWillReceiveProps(nextProps) {
     const currentId = this.props.match.params.id;
     const nextId = nextProps.match.params.id;
@@ -19,22 +22,25 @@ export default class SlideShow extends Component {
     this.setState({ animateDirection });
   }
 
-  handleKeyDown = e => {
-    e.preventDefault();
-    const key = e.keyCode;
-    let { id } = this.props.match.params;
-    if ((+id === 1 && key === 37) || (+id === this.state.slides.length && key === 39)) return;
+  navigateSlide(id, key) {
+    if ((id === 1 && key === 37) || (id === this.state.slides.length && key === 39)) return;
     switch (key) {
       case 39:
-        id = +id + 1;
+        id = id + 1;
         break;
       case 37:
-        id = +id - 1;
+        id = id - 1;
         break;
       default:
         return;
     }
     this.props.history.push(`/slides/${id}`);
+  }
+
+  handleKeyDown = (e) => {
+    e.persist();
+    e.preventDefault();
+    this.navigateSlide(+this.props.match.params.id, e.keyCode);
   };
 
   render() {
@@ -50,7 +56,7 @@ export default class SlideShow extends Component {
       <TransitionGroup
         id="slides-wrapper"
         tabIndex="0"
-        onKeyUp={this.handleKeyDown}
+        onKeyDown={this.handleKeyDown}
         className={this.state.animateDirection}
       >
         <Animate key={slide.id}>
